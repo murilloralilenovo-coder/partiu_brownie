@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Partiu Brownie — monte seu brownie ou escolha um sabor pronto.">
+  <title>Partiu Brownie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio">
+      <span class="avatar">
+        <img src="assets/logo-oficial-partiu-brownie.jpg" alt="Partiu Brownie" onerror="this.style.display='none'">
+        <span>PB</span>
+      </span>
+      <span class="brand-copy">
+        <strong>Partiu Brownie</strong>
+        <small>Caraguatatuba • SP</small>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#sabores">Sabores</a>
+      <a href="#monte">Monte o seu</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="instagram-link" href="https://instagram.com/partiu_brownie" target="_blank">Instagram</a>
+      <button class="cart-trigger" id="openCart">Sua caixa <b id="cartBadge">0</b></button>
+      <button class="menu" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">feito em Caraguatatuba • @partiu_brownie</span>
+
+        <div class="hero-logo">
+          <img src="assets/logo-oficial-partiu-brownie.jpg" alt="Logo Partiu Brownie">
+        </div>
+
+
+        <div class="brand-sticker">bateu a vontade?</div>
+
+        <h1>Então<br><em>Partiu Brownie.</em></h1>
+
+        <p>
+          Aqui você escolhe sem complicação: pega um sabor da casa
+          ou monta um brownie completamente do seu jeito.
+        </p>
+        <div class="hero-actions">
+          <a class="btn dark" href="#monte">Montar meu brownie</a>
+          <a class="btn light" href="#sabores">Ver sabores</a>
+        </div>
+
+        <div class="mini-stats">
+          <div><strong>Escolhe</strong><span>massa, recheio e extra</span></div>
+          <div><strong>Monta</strong><span>uma combinação só sua</span></div>
+          <div><strong>Partiu</strong><span>adiciona na caixa e pronto</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="blob"></div>
+        <div class="package">
+          <div class="package-brand"><small>partiu</small><strong>BROWNIE</strong></div>
+          <div class="brownie">
+            <div class="top"></div><div class="cream"></div><div class="bottom"></div>
+          </div>
+          <span class="package-text">Bateu a vontade? Partiu. 🍫</span>
+        </div>
+        <div class="floating one"><b>✦</b><span><strong>Personalize</strong><small>massa, recheio e mais</small></span></div>
+        <div class="floating two"><b>♡</b><span><strong>Favoritos</strong><small>Ninho, Nutella e brigadeiro</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <span class="eyebrow">Como funciona</span>
+      <h2 class="section-title">Escolhe. Monta. Partiu.</h2>
+      <div class="steps">
+        <article><span>01</span><div><h3>Escolhe</h3><p>Vai no clássico ou inventa uma combinação nova.</p></div></article>
+        <article><span>02</span><div><h3>Monta</h3><p>Coloca tudo na sua caixa, do seu jeito.</p></div></article>
+        <article><span>03</span><div><h3>Partiu</h3><p>Confere o pedido e chama a gente no WhatsApp.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="sabores">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Sabores da casa</span>
+          <h2 class="section-title">Os queridinhos da Partiu.</h2>
+        </div>
+        <p>Se não quiser montar, vai em um desses que já são sucesso.</p>
+      </div>
+
+      
+<div class="product-grid">
+        <article class="product">
+          <div class="visual v1"><span>Clássico</span><div class="mini-brownie"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brownie tradicional</h3><strong>R$ 8</strong></div>
+            <p>O brownie clássico da marca, simples e muito pedido.</p>
+            <button class="add-ready" data-name="Brownie tradicional" data-price="8">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+
+        <article class="product featured">
+          <div class="visual v2"><span>Cremoso</span><div class="mini-brownie cream-b"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brownie de Ninho</h3><strong>R$ 13</strong></div>
+            <p>Brownie com recheio de Ninho, inspirado no cardápio do Instagram.</p>
+            <button class="add-ready" data-name="Brownie de Ninho" data-price="13">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+
+        <article class="product featured">
+          <div class="visual v2"><span>Mais pedido</span><div class="mini-brownie cream-b"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brownie de Ninho com Nutella</h3><strong>R$ 13</strong></div>
+            <p>Ninho com Nutella em uma das combinações mais fortes da marca.</p>
+            <button class="add-ready" data-name="Brownie de Ninho com Nutella" data-price="13">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="visual v3"><span>Chocolate</span><div class="mini-brownie"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brownie de brigadeiro</h3><strong>R$ 13</strong></div>
+            <p>Chocolate intenso com recheio cremoso de brigadeiro.</p>
+            <button class="add-ready" data-name="Brownie de brigadeiro" data-price="13">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="visual v2"><span>Dupla</span><div class="mini-brownie cream-b"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brownie de Ninho com brigadeiro</h3><strong>R$ 13</strong></div>
+            <p>Uma combinação com dois recheios, igual ao cardápio da Partiu Brownie.</p>
+            <button class="add-ready" data-name="Brownie de Ninho com brigadeiro" data-price="13">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="visual v4"><span>2 em 1</span><div class="mini-brownie cookie"></div></div>
+          <div class="product-body">
+            <div class="product-line"><h3>Brokie</h3><strong>R$ 8</strong></div>
+            <p>Metade brownie, metade cookie. Crocante e macio ao mesmo tempo.</p>
+            <button class="add-ready" data-name="Brokie" data-price="8">Adicionar à caixa <b>+</b></button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="builder-section" id="monte">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Monte o seu</span>
+          <h2 class="section-title">Cria o seu Partiu.</h2>
+        </div>
+        <p>Escolha a massa, o recheio principal e, se quiser, um recheio extra.</p>
+      </div>
+
+      
+<div class="builder-layout">
+        <div class="builder">
+
+          <div class="group" data-group="massa">
+            <div class="group-title"><span>01</span><div><h3>Massa</h3><p>Escolha a base do seu brownie.</p></div></div>
+            <div class="choices">
+              <button class="choice active" data-value="Tradicional" data-price="8"><span>Tradicional</span><small>R$ 8</small></button>
+              <button class="choice" data-value="Brokie" data-price="8"><span>Brokie</span><small>R$ 8</small></button>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="group" data-group="recheio">
+            <div class="group-title"><span>02</span><div><h3>Recheio</h3><p>Escolha um dos recheios do cardápio.</p></div></div>
+            <div class="choices">
+              <button class="choice active" data-value="Sem recheio" data-price="0"><span>Sem recheio</span><small>Incluso</small></button>
+              <button class="choice" data-value="Ninho" data-price="5"><span>Ninho</span><small>+ R$ 5</small></button>
+              <button class="choice" data-value="Ninho com Nutella" data-price="5"><span>Ninho com Nutella</span><small>+ R$ 5</small></button>
+              <button class="choice" data-value="Brigadeiro" data-price="5"><span>Brigadeiro</span><small>+ R$ 5</small></button>
+              <button class="choice" data-value="Ninho com brigadeiro" data-price="5"><span>Ninho com brigadeiro</span><small>+ R$ 5</small></button>
+              <button class="choice" data-value="Brokie" data-price="0"><span>Brokie</span><small>base cookie</small></button>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="group" data-group="extra">
+            <div class="group-title"><span>03</span><div><h3>Extra</h3><p>Se quiser, escolha um segundo recheio.</p></div></div>
+            <div class="choices">
+              <button class="choice active" data-value="Sem extra" data-price="0"><span>Sem extra</span><small>Incluso</small></button>
+              <button class="choice" data-value="Ninho" data-price="2"><span>Ninho</span><small>+ R$ 2</small></button>
+              <button class="choice" data-value="Brigadeiro" data-price="2"><span>Brigadeiro</span><small>+ R$ 2</small></button>
+              <button class="choice" data-value="Nutella" data-price="2"><span>Nutella</span><small>+ R$ 2</small></button>
+              <button class="choice" data-value="Morango" data-price="2"><span>Morango</span><small>+ R$ 2</small></button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="summary">
+          <div class="summary-top"><span>Seu brownie</span><div class="tiny-brownie"></div></div>
+          <h3 id="summaryTitle">Tradicional</h3>
+          <div class="summary-list">
+            <div><span>Massa</span><b id="sMassa">Tradicional</b></div>
+            <div><span>Recheio</span><b id="sRecheio">Sem recheio</b></div>
+            <div><span>Extra</span><b id="sExtra">Sem extra</b></div>
+          </div>
+          <div class="summary-total"><span>Total</span><strong id="summaryPrice">R$ 8,00</strong></div>
+          <button class="btn aqua full" id="addCustom">Adicionar à caixa</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="cta">
+    <div class="container cta-inner">
+      <div>
+        <span class="eyebrow">o final você já sabe</span>
+        <h2 class="section-title">Bateu a vontade?<br>Partiu Brownie.</h2>
+      </div>
+      <div class="cta-actions">
+        <a class="btn dark" href="#monte">Montar agora</a>
+        <a class="btn light" href="https://wa.me/5512987067121" target="_blank">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><strong class="footer-brand">Partiu Brownie</strong><p>Bateu a vontade? Partiu. • Caraguatatuba, SP</p></div>
+    <div class="footer-links"><a href="#sabores">Sabores</a><a href="#monte">Monte o seu</a></div>
+    <div class="footer-links"><a href="https://instagram.com/partiu_brownie" target="_blank">@partiu_brownie</a><a href="https://wa.me/5512987067121" target="_blank">(12) 98706-7121</a></div>
+  </div>
+  <div class="container footer-bottom"><span>Projeto de empreendedorismo • 2026</span><span>Partiu Brownie</span></div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart" id="cart">
+  <div class="cart-header">
+    <div><small>Seu pedido</small><h2>Sua caixa</h2></div>
+    <button id="closeCart">×</button>
+  </div>
+  <div class="cart-body" id="cartItems">
+    <div class="empty">
+      <span>🍫</span><h3>Sua caixa está vazia.</h3><p>Adicione um sabor pronto ou monte seu brownie.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+    <button class="btn dark full" id="checkout">Finalizar pedido</button>
+    <button class="clear" id="clearCart">Limpar caixa</button>
+    <small>Simulação escolar. Nenhum pagamento é realizado.</small>
+  </div>
+</aside>
+
+<div class="toast" id="toast">✓ <span id="toastText">Adicionado à caixa</span></div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="modal-close" id="closeModal">×</button>
+    <span class="modal-icon">🍫</span>
+    <span class="eyebrow">Pedido pronto</span>
+    <h2>Agora é só finalizar.</h2>
+    <p id="modalText"></p>
+    <a class="btn dark full" href="https://wa.me/5512987067121" target="_blank">Chamar no WhatsApp</a>
+    <button class="btn light full" id="continueBtn">Continuar no site</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
