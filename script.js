@@ -71,8 +71,12 @@ function updateBrowniePreview(){
   if(extra === "Morango") setLayer(extraLayer,"morango");
 
   preview.classList.remove("preview-pop");
-  void preview.offsetWidth;
-  preview.classList.add("preview-pop");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      preview.classList.add("preview-pop");
+    });
+  });
 }
 
 function updateSummary(){

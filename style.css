@@ -298,113 +298,260 @@ footer {
 }
 
 
-/* PREVIEW ANIMADO DO BROWNIE */
+/* PREVIEW ANIMADO DO BROWNIE — VERSÃO MAIS NATURAL */
+.preview-stage {
+  min-height: 138px;
+  margin: 12px 0 8px;
+  display: grid;
+  place-items: center;
+  perspective: 700px;
+}
+
 .brownie-preview {
-  width: 108px;
-  height: 88px;
+  width: 164px;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  flex-shrink: 0;
-  filter: drop-shadow(0 10px 12px rgba(0,0,0,.16));
+  filter: drop-shadow(0 16px 18px rgba(0,0,0,.22));
   transform-origin: center;
 }
 
-.brownie-preview.preview-pop {
-  animation: previewPop .28s ease;
+.brownie-preview.preview-pop .preview-top {
+  animation: brownieTopBounce .34s cubic-bezier(.2,.8,.3,1);
 }
 
-@keyframes previewPop {
-  0% { transform: scale(.94); opacity: .8; }
-  65% { transform: scale(1.035); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+.brownie-preview.preview-pop .preview-bottom {
+  animation: brownieBottomBounce .34s cubic-bezier(.2,.8,.3,1);
+}
+
+@keyframes brownieTopBounce {
+  0%   { transform: translateY(-5px) scale(.97); }
+  60%  { transform: translateY(2px) scale(1.015); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes brownieBottomBounce {
+  0%   { transform: translateY(4px) scale(.98); }
+  60%  { transform: translateY(-1px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .preview-top,
 .preview-bottom {
-  position: absolute;
-  left: 7px;
-  width: 94px;
-  height: 29px;
-  background: linear-gradient(150deg,#71402e,#3d2119);
-  transition: background .22s ease, transform .22s ease;
+  width: 150px;
+  position: relative;
   overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    background .28s ease,
+    border-color .28s ease,
+    transform .28s ease;
 }
 
 .preview-top {
-  top: 5px;
-  border-radius: 11px 11px 5px 5px;
+  height: 44px;
+  border-radius: 15px 15px 8px 8px;
+  background:
+    radial-gradient(circle at 22% 40%, rgba(255,255,255,.05) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 28%, rgba(255,255,255,.04) 0 2px, transparent 3px),
+    linear-gradient(160deg,#774631 0%,#5a3024 46%,#351a14 100%);
+  border-top: 2px solid rgba(255,255,255,.07);
+  box-shadow:
+    inset 0 -8px 12px rgba(31,13,9,.20),
+    inset 0 4px 6px rgba(255,255,255,.025);
   z-index: 5;
 }
 
+.preview-top::before {
+  content: "";
+  position: absolute;
+  inset: 5px 8px auto;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
+  transform: rotate(-1deg);
+}
+
 .preview-bottom {
-  bottom: 5px;
-  border-radius: 5px 5px 11px 11px;
+  height: 46px;
+  border-radius: 8px 8px 15px 15px;
+  background:
+    linear-gradient(160deg,#6b392a 0%,#4a251c 48%,#2d1510 100%);
+  box-shadow:
+    inset 0 8px 13px rgba(255,255,255,.018),
+    inset 0 -7px 12px rgba(20,7,5,.22);
   z-index: 1;
 }
 
-.brownie-preview.is-brokie .preview-top,
-.brownie-preview.is-brokie .preview-bottom {
-  background: linear-gradient(145deg,#9a6842,#5d3926);
+.preview-bottom::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  top: 7px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
 }
 
+/* Brokie: massa mais clara, com aparência de cookie */
+.brownie-preview.is-brokie .preview-top {
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.05) 0 2px, transparent 3px),
+    linear-gradient(150deg,#b47b4f 0%,#8d5838 52%,#68402b 100%);
+  border-top-color: rgba(255,255,255,.12);
+}
+
+.brownie-preview.is-brokie .preview-bottom {
+  background:
+    linear-gradient(150deg,#a46c46 0%,#7c4a31 55%,#53301f 100%);
+}
+
+/* Camadas entram no meio e realmente "abrem" o brownie */
 .preview-filling,
 .preview-extra {
-  position: absolute;
-  left: 10px;
-  width: 88px;
-  height: 8px;
-  border-radius: 999px;
+  width: 140px;
+  height: 0;
+  margin: 0;
+  border-radius: 5px;
   opacity: 0;
-  transform: translateY(-4px) scaleX(.88);
-  transition: opacity .2s ease, transform .24s ease, background .2s ease;
+  flex-shrink: 0;
+  transform: scaleX(.82);
+  transform-origin: center;
+  transition:
+    height .28s cubic-bezier(.2,.8,.3,1),
+    margin .28s cubic-bezier(.2,.8,.3,1),
+    opacity .18s ease,
+    transform .28s cubic-bezier(.2,.8,.3,1),
+    background .22s ease;
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,.10);
 }
 
 .preview-filling.show,
 .preview-extra.show {
+  height: 9px;
+  margin: 1px 0;
   opacity: 1;
-  transform: translateY(0) scaleX(1);
+  transform: scaleX(1);
 }
 
-.filling-a { top: 36px; z-index: 4; }
-.filling-b { top: 46px; z-index: 3; }
-.preview-extra { top: 56px; z-index: 2; }
+.preview-extra.show {
+  height: 7px;
+}
 
 .layer-ninho {
-  background: linear-gradient(90deg,#fff7df,#e9d8b8);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+  background: linear-gradient(
+    90deg,
+    #fff8e8 0%,
+    #f7e9c9 45%,
+    #fff5df 68%,
+    #e8d4ac 100%
+  );
+  box-shadow:
+    inset 0 -2px 3px rgba(134,99,49,.11),
+    0 1px 0 rgba(255,255,255,.25);
 }
 
 .layer-nutella {
-  background: linear-gradient(90deg,#6d3525,#3a1a13 70%,#78412e);
+  background: linear-gradient(
+    90deg,
+    #56281d 0%,
+    #7d402b 30%,
+    #3b190f 68%,
+    #6a3524 100%
+  );
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,.035),
+    inset 0 -2px 3px rgba(0,0,0,.18);
 }
 
 .layer-brigadeiro {
-  background: linear-gradient(90deg,#4e2118,#26100c 72%,#5e2d21);
+  background: linear-gradient(
+    90deg,
+    #32130e 0%,
+    #4d2017 38%,
+    #23100b 72%,
+    #442018 100%
+  );
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,.025),
+    inset 0 -2px 3px rgba(0,0,0,.22);
 }
 
 .layer-morango {
-  background: linear-gradient(90deg,#cf5b65,#ef8790,#c94652);
+  background: linear-gradient(
+    90deg,
+    #b93645 0%,
+    #e76d78 45%,
+    #c03a49 100%
+  );
 }
 
+/* Rachaduras da casquinha */
+.crack {
+  position: absolute;
+  height: 2px;
+  background: rgba(30,12,9,.45);
+  border-radius: 999px;
+  opacity: .75;
+}
+
+.crack-1 {
+  width: 28px;
+  left: 34px;
+  top: 21px;
+  transform: rotate(15deg);
+}
+
+.crack-1::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  right: 2px;
+  top: 4px;
+  background: inherit;
+  transform: rotate(-42deg);
+  border-radius: inherit;
+}
+
+.crack-2 {
+  width: 24px;
+  right: 27px;
+  top: 16px;
+  transform: rotate(-12deg);
+}
+
+.brownie-preview.is-brokie .crack {
+  opacity: .28;
+}
+
+/* Chips do Brokie */
 .chip,
 .berry {
   position: absolute;
   opacity: 0;
-  transform: scale(.4);
-  transition: opacity .18s ease, transform .22s ease;
+  transition:
+    opacity .20s ease,
+    transform .28s cubic-bezier(.2,.8,.3,1);
 }
 
 .chip {
-  width: 8px;
-  height: 6px;
-  border-radius: 50%;
-  background: #3b2118;
+  width: 9px;
+  height: 7px;
+  border-radius: 50% 45% 55% 45%;
+  background: #342016;
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,.18);
 }
 
-.chip-1 { left: 18px; top: 8px; transform: rotate(18deg) scale(.4); }
-.chip-2 { left: 47px; top: 15px; transform: rotate(-10deg) scale(.4); }
-.chip-3 { right: 17px; top: 8px; transform: rotate(24deg) scale(.4); }
-.chip-4 { left: 27px; bottom: 7px; transform: rotate(-13deg) scale(.4); }
-.chip-5 { right: 25px; bottom: 11px; transform: rotate(12deg) scale(.4); }
+.chip-1 { left: 26px; top: 11px; transform: rotate(18deg) scale(.25); }
+.chip-2 { left: 70px; top: 24px; transform: rotate(-10deg) scale(.25); }
+.chip-3 { right: 25px; top: 11px; transform: rotate(24deg) scale(.25); }
+.chip-4 { left: 42px; top: 14px; transform: rotate(-13deg) scale(.25); }
+.chip-5 { right: 38px; top: 24px; transform: rotate(12deg) scale(.25); }
 
 .brownie-preview.is-brokie .chip {
   opacity: 1;
@@ -416,27 +563,72 @@ footer {
 .brownie-preview.is-brokie .chip-4 { transform: rotate(-13deg) scale(1); }
 .brownie-preview.is-brokie .chip-5 { transform: rotate(12deg) scale(1); }
 
+/* Morango aparece como topping, não como bolinhas soltas no meio */
 .berry {
-  width: 9px;
-  height: 9px;
-  border-radius: 50% 50% 45% 45%;
-  background: #d84e57;
-  box-shadow: inset -2px -1px 0 rgba(91,22,29,.2);
-  z-index: 7;
+  width: 16px;
+  height: 13px;
+  border-radius: 60% 60% 55% 55%;
+  background: linear-gradient(145deg,#ee6570,#b92f3e);
+  box-shadow:
+    inset -3px -2px 0 rgba(96,17,26,.18),
+    0 3px 5px rgba(0,0,0,.15);
+  z-index: 8;
+  transform: translateY(7px) scale(.45) rotate(0deg);
 }
 
-.berry-1 { left: 36px; top: 7px; }
-.berry-2 { right: 27px; top: 12px; }
+.berry::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: -4px;
+  width: 6px;
+  height: 5px;
+  background: #5e8d46;
+  clip-path: polygon(50% 0,100% 100%,50% 68%,0 100%);
+}
+
+.berry-1 {
+  left: 46px;
+  top: 2px;
+  transform: translateY(7px) scale(.45) rotate(-10deg);
+}
+
+.berry-2 {
+  right: 42px;
+  top: 5px;
+  transform: translateY(7px) scale(.45) rotate(11deg);
+}
 
 .brownie-preview.has-strawberry .berry {
   opacity: 1;
-  transform: scale(1);
+}
+
+.brownie-preview.has-strawberry .berry-1 {
+  transform: translateY(0) scale(1) rotate(-10deg);
+}
+
+.brownie-preview.has-strawberry .berry-2 {
+  transform: translateY(0) scale(1) rotate(11deg);
 }
 
 @media(max-width:590px){
+  .preview-stage {
+    min-height: 126px;
+  }
+
   .brownie-preview {
-    width: 96px;
+    width: 148px;
     transform: scale(.92);
-    transform-origin: right center;
+    transform-origin: center;
+  }
+
+  .preview-top,
+  .preview-bottom {
+    width: 142px;
+  }
+
+  .preview-filling,
+  .preview-extra {
+    width: 132px;
   }
 }
