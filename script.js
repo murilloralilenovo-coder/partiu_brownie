@@ -12,7 +12,7 @@ const customTotal=()=>Object.values(selected).reduce((s,i)=>s+i.price,0);
 
 function getCustomTitle(){
   let title = selected.massa.value;
-  if(selected.recheio.value !== "Sem recheio" && selected.recheio.value !== "Brokie"){
+  if(selected.recheio.value !== "Sem recheio"){
     title += " com " + selected.recheio.value;
   }
   if(selected.extra.value !== "Sem extra"){
@@ -21,12 +21,67 @@ function getCustomTitle(){
   return title;
 }
 
+function clearLayer(layer){
+  layer.className = layer.className
+    .split(" ")
+    .filter(name => !name.startsWith("layer-") && name !== "show")
+    .join(" ");
+}
+
+function setLayer(layer, type){
+  clearLayer(layer);
+  if(!type) return;
+  layer.classList.add("show", "layer-" + type);
+}
+
+function updateBrowniePreview(){
+  const preview=document.querySelector("#browniePreview");
+  const fillingA=document.querySelector("#fillingA");
+  const fillingB=document.querySelector("#fillingB");
+  const extraLayer=document.querySelector("#extraLayer");
+
+  preview.classList.toggle("is-brokie", selected.massa.value === "Brokie");
+  preview.classList.toggle("has-strawberry", selected.extra.value === "Morango");
+
+  setLayer(fillingA, null);
+  setLayer(fillingB, null);
+  setLayer(extraLayer, null);
+
+  const recheio = selected.recheio.value;
+
+  if(recheio === "Ninho"){
+    setLayer(fillingA,"ninho");
+  }
+  if(recheio === "Ninho com Nutella"){
+    setLayer(fillingA,"ninho");
+    setLayer(fillingB,"nutella");
+  }
+  if(recheio === "Brigadeiro"){
+    setLayer(fillingA,"brigadeiro");
+  }
+  if(recheio === "Ninho com brigadeiro"){
+    setLayer(fillingA,"ninho");
+    setLayer(fillingB,"brigadeiro");
+  }
+
+  const extra = selected.extra.value;
+  if(extra === "Ninho") setLayer(extraLayer,"ninho");
+  if(extra === "Brigadeiro") setLayer(extraLayer,"brigadeiro");
+  if(extra === "Nutella") setLayer(extraLayer,"nutella");
+  if(extra === "Morango") setLayer(extraLayer,"morango");
+
+  preview.classList.remove("preview-pop");
+  void preview.offsetWidth;
+  preview.classList.add("preview-pop");
+}
+
 function updateSummary(){
   document.querySelector("#summaryTitle").textContent=getCustomTitle();
   document.querySelector("#sMassa").textContent=selected.massa.value;
   document.querySelector("#sRecheio").textContent=selected.recheio.value;
   document.querySelector("#sExtra").textContent=selected.extra.value;
   document.querySelector("#summaryPrice").textContent=money(customTotal());
+  updateBrowniePreview();
 }
 
 document.querySelectorAll(".group").forEach(group=>{
