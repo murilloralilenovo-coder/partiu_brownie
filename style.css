@@ -223,3 +223,76 @@
     height:92px;
   }
 }
+
+
+/* CORREÇÃO: evita o site deslizar horizontalmente no celular */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+.container,
+.header-inner,
+.hero-grid,
+.section-head,
+.product-grid,
+.builder-layout,
+.footer-grid,
+.cta-inner {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.header-inner > *,
+.hero-grid > *,
+.section-head > *,
+.builder-layout > *,
+.footer-grid > * {
+  min-width: 0;
+}
+
+.hero,
+.process,
+.products,
+.builder-section,
+.cta,
+footer {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.cart {
+  max-width: 100vw;
+}
+
+@media (max-width: 590px) {
+  .floating.one {
+    left: 0;
+  }
+
+  .floating.two {
+    right: 0;
+  }
+
+  .hero-art,
+  .package,
+  .product,
+  .builder,
+  .summary {
+    max-width: 100%;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand-copy {
+    min-width: 0;
+  }
+}
