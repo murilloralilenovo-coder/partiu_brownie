@@ -1,318 +1,245 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Partiu Brownie — monte seu brownie ou escolha um sabor pronto.">
-  <title>Partiu Brownie</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Partiu Brownie</title>
+<meta name="description" content="Partiu Brownie: escolha um sabor pronto ou monte o seu brownie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cocoa:#2a1710;--cocoa2:#4a2c20;--paper:#fbf7f2;--sand:#efe5d8;--berry:#c9304f;--ninho:#f2dc9b;--line:#dccfbf;--r:8px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:17px/1.6 Figtree,system-ui,sans-serif;color:var(--cocoa);background:var(--paper)}
+h1,h2,h3{font-family:'Bricolage Grotesque',Georgia,sans-serif;line-height:1.1;letter-spacing:-.01em}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
+.btn{display:inline-block;border:2px solid var(--cocoa);background:var(--cocoa);color:#fff;font:600 1rem Figtree,sans-serif;padding:12px 22px;border-radius:var(--r);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--cocoa2)}
+.btn.alt{background:transparent;color:var(--cocoa)}
+.btn.alt:hover{background:var(--sand)}
+.btn.berry{background:var(--berry);border-color:var(--berry)}
+/* espaços de foto: coloque a imagem na pasta assets/ com o nome indicado */
+.ph{position:relative;overflow:hidden;border-radius:var(--r);background:linear-gradient(135deg,var(--sand),#e4d3bf);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--cocoa2);font-size:.85rem;padding:12px}
+.ph::after{content:attr(data-label);position:relative}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+/* topo */
+header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.2rem 'Bricolage Grotesque',sans-serif;text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:6px;object-fit:cover}
+nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+nav a{text-decoration:none;font-weight:500}
+nav a:hover{color:var(--berry)}
+.cartbtn{border:2px solid var(--cocoa);background:none;padding:7px 14px;border-radius:var(--r);font:600 .95rem Figtree;cursor:pointer;color:var(--cocoa)}
+.cartbtn b{background:var(--berry);color:#fff;border-radius:4px;padding:1px 7px;margin-left:6px}
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.hero p{margin:18px 0 26px;max-width:46ch;font-size:1.1rem}
+.hero .ph{aspect-ratio:4/5}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+/* sabores */
+.sab{background:var(--sand)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:32px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/3;border-radius:0}
+.card div.b{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card p{font-size:.95rem;flex:1}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.price{font:700 1.3rem 'Bricolage Grotesque'}
+.tag{font-size:.8rem;font-weight:600;color:var(--berry)}
+/* monte */
+.build{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;margin-top:32px;align-items:start}
+.step{margin-bottom:28px}
+.step h3{margin-bottom:4px}
+.step small{display:block;margin-bottom:12px;color:var(--cocoa2)}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0}
+.opt label{display:flex;flex-direction:column;gap:2px;border:2px solid var(--line);border-radius:var(--r);padding:12px 14px;cursor:pointer;background:#fff;height:100%}
+.opt label span{font-size:.85rem;color:var(--cocoa2)}
+.opt input:checked+label{border-color:var(--berry);background:#fff3f5;box-shadow:inset 0 0 0 1px var(--berry)}
+.opt input:checked+label::after{content:"✓";position:absolute;top:8px;right:12px;color:var(--berry);font-weight:800}
+.opt input:focus-visible+label{outline:3px solid var(--berry);outline-offset:2px}
+.preview{position:sticky;top:84px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.slice{height:210px;display:flex;flex-direction:column;justify-content:center;margin:6px 0 18px}
+.slice .top,.slice .base{background:#3a1f14;position:relative;overflow:hidden}
+.slice .top{height:62px;border-radius:12px 12px 0 0;background:linear-gradient(#53301f,#3a1f14)}
+.slice .base{height:62px;border-radius:0 0 12px 12px}
+.slice .fill{height:0;transition:height .25s,background .25s;position:relative}
+.slice .fill.on{height:34px}
+.slice .fill.f2.on{height:20px}
+.slice .empty{text-align:center;font-size:.8rem;color:#e8d5c4;line-height:62px}
+.chips i{position:absolute;width:9px;height:9px;border-radius:50%;background:#e9c98e;opacity:.85}
+.sum{list-style:none;padding:0;margin:0 0 16px;border-top:1px solid var(--line)}
+.sum li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.sum li:last-child{font:700 1.2rem 'Bricolage Grotesque';border:0}
+.preview .btn{width:100%;text-align:center}
+/* quem faz */
+.about{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
+.about .ph{aspect-ratio:1}
+.about p{margin-top:14px;max-width:52ch}
+/* final */
+.end{background:var(--cocoa);color:#fff;text-align:center}
+.end .btns{justify-content:center;margin-top:24px}
+.end .btn.alt{color:#fff;border-color:#fff}
+.end .btn.alt:hover{background:var(--cocoa2)}
+.end .btn:not(.alt):not(.berry){background:#fff;color:var(--cocoa);border-color:#fff}
+footer{padding:28px 0;font-size:.9rem;color:var(--cocoa2)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+/* caixa */
+.shade{position:fixed;inset:0;background:rgba(42,23,16,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.shade.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--paper);z-index:50;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;padding:22px}
+.drawer.on{transform:none}
+.drawer header{position:static;border:0;display:flex;justify-content:space-between;align-items:center;padding:0 0 14px}
+.drawer header h2{font-size:1.6rem}
+.x{background:none;border:0;font-size:1.8rem;cursor:pointer;color:var(--cocoa)}
+.items{flex:1;overflow:auto;border-top:1px solid var(--line)}
+.items .it{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.it div{flex:1;font-size:.95rem}
+.it small{display:block;color:var(--cocoa2)}
+.it button{background:none;border:0;color:var(--berry);font-weight:600;cursor:pointer}
+.vazia{padding:28px 0;color:var(--cocoa2)}
+.tot{display:flex;justify-content:space-between;font:700 1.3rem 'Bricolage Grotesque';padding:14px 0}
+.drawer .btn{width:100%;text-align:center;margin-bottom:8px}
+.note{font-size:.8rem;color:var(--cocoa2);text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,90px);background:var(--cocoa);color:#fff;padding:11px 20px;border-radius:var(--r);z-index:60;transition:transform .25s}
+.toast.on{transform:translate(-50%,0)}
+@media(max-width:820px){.hero,.build,.about{grid-template-columns:1fr}.preview{position:static}nav .hide{display:none}section{padding:52px 0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
+<header><div class="wrap">
+  <a class="brand" href="#inicio"><img src="assets/logo-oficial-partiu-brownie.jpg" alt="" onerror="this.style.display='none'">Partiu Brownie</a>
+  <nav>
+    <a class="hide" href="#sabores">Sabores</a>
+    <a class="hide" href="#monte">Monte o seu</a>
+    <a class="hide" href="#quem">Quem faz</a>
+    <button class="cartbtn" id="openCart">Sua caixa <b id="count">0</b></button>
+  </nav>
+</div></header>
 
-<header class="header">
-  <div class="container header-inner">
-    <a class="brand" href="#inicio">
-      <span class="avatar">
-        <img src="assets/logo-oficial-partiu-brownie.jpg" alt="Partiu Brownie" onerror="this.style.display='none'">
-        <span>PB</span>
-      </span>
-      <span class="brand-copy">
-        <strong>Partiu Brownie</strong>
-        <small>Caraguatatuba • SP</small>
-      </span>
-    </a>
-
-    <nav class="nav" id="nav">
-      <a href="#sabores">Sabores</a>
-      <a href="#monte">Monte o seu</a>
-    </nav>
-
-    <div class="header-actions">
-      <a class="instagram-link" href="https://instagram.com/partiu_brownie" target="_blank">Instagram</a>
-      <button class="cart-trigger" id="openCart">Sua caixa <b id="cartBadge">0</b></button>
-      <button class="menu" id="menuBtn" aria-label="Menu">☰</button>
-    </div>
+<main id="inicio">
+<section><div class="wrap hero">
+  <div>
+    <h1>Brownie feito do seu jeito.</h1>
+    <p>Escolha um sabor da casa ou monte o seu: massa, recheio e um extra se quiser. Depois é só chamar a gente no WhatsApp.</p>
+    <div class="btns"><a class="btn berry" href="#monte">Montar meu brownie</a><a class="btn alt" href="#sabores">Ver sabores</a></div>
   </div>
-</header>
+  <div class="ph" data-label="Foto principal: assets/hero.jpg"><img src="assets/hero.jpg" alt="Brownies da Partiu Brownie" onerror="this.remove()"></div>
+</div></section>
 
-<main>
-  <section class="hero" id="inicio">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">feito em Caraguatatuba • @partiu_brownie</span>
+<section class="sab" id="sabores"><div class="wrap">
+  <h2>Sabores da casa</h2>
+  <p style="margin-top:8px">Se não quiser montar, escolha um destes.</p>
+  <div class="grid" id="grid"></div>
+</div></section>
 
-        <div class="hero-logo">
-          <img src="assets/logo-oficial-partiu-brownie.jpg" alt="Logo Partiu Brownie">
-        </div>
-
-
-        <div class="brand-sticker">bateu a vontade?</div>
-
-        <h1>Então<br><em>Partiu Brownie.</em></h1>
-
-        <p>
-          Aqui você escolhe sem complicação: pega um sabor da casa
-          ou monta um brownie completamente do seu jeito.
-        </p>
-        <div class="hero-actions">
-          <a class="btn dark" href="#monte">Montar meu brownie</a>
-          <a class="btn light" href="#sabores">Ver sabores</a>
-        </div>
-
-        <div class="mini-stats">
-          <div><strong>Escolhe</strong><span>massa, recheio e extra</span></div>
-          <div><strong>Monta</strong><span>uma combinação só sua</span></div>
-          <div><strong>Partiu</strong><span>adiciona na caixa e pronto</span></div>
-        </div>
-      </div>
-
-      <div class="hero-art">
-        <div class="blob"></div>
-        <div class="package">
-          <div class="package-brand"><small>partiu</small><strong>BROWNIE</strong></div>
-          <div class="brownie">
-            <div class="top"></div><div class="cream"></div><div class="bottom"></div>
-          </div>
-          <span class="package-text">Bateu a vontade? Partiu. 🍫</span>
-        </div>
-        <div class="floating one"><b>✦</b><span><strong>Personalize</strong><small>massa, recheio e mais</small></span></div>
-        <div class="floating two"><b>♡</b><span><strong>Favoritos</strong><small>Ninho, Nutella e brigadeiro</small></span></div>
-      </div>
+<section id="monte"><div class="wrap">
+  <h2>Monte o seu brownie</h2>
+  <p style="margin-top:8px">Escolha a massa, o recheio e, se quiser, um extra. O desenho ao lado mostra como fica por dentro.</p>
+  <div class="build">
+    <div>
+      <div class="step"><h3>1. Massa</h3><small>A base do brownie.</small><div class="opts" id="o-massa"></div></div>
+      <div class="step"><h3>2. Recheio</h3><small>Escolha um, ou deixe só a massa.</small><div class="opts" id="o-rec"></div></div>
+      <div class="step"><h3>3. Extra</h3><small>Um segundo recheio, se quiser.</small><div class="opts" id="o-ext"></div></div>
     </div>
-  </section>
+    <aside class="preview" aria-live="polite">
+      <h3>Seu brownie por dentro</h3>
+      <div class="slice" id="slice"></div>
+      <ul class="sum" id="sum"></ul>
+      <button class="btn" id="addMonte">Adicionar à caixa</button>
+    </aside>
+  </div>
+</div></section>
 
-  <section class="process">
-    <div class="container">
-      <span class="eyebrow">Como funciona</span>
-      <h2 class="section-title">Escolhe. Monta. Partiu.</h2>
-      <div class="steps">
-        <article><span>01</span><div><h3>Escolhe</h3><p>Vai no clássico ou inventa uma combinação nova.</p></div></article>
-        <article><span>02</span><div><h3>Monta</h3><p>Coloca tudo na sua caixa, do seu jeito.</p></div></article>
-        <article><span>03</span><div><h3>Partiu</h3><p>Confere o pedido e chama a gente no WhatsApp.</p></div></article>
-      </div>
-    </div>
-  </section>
+<section class="sab" id="quem"><div class="wrap about">
+  <div class="ph" data-label="Foto do grupo: assets/equipe.jpg"><img src="assets/equipe.jpg" alt="Equipe da Partiu Brownie" onerror="this.remove()"></div>
+  <div>
+    <h2>Quem faz a Partiu</h2>
+    <p>Somos um grupo de estudantes de Caraguatatuba e criamos a Partiu Brownie para um projeto de empreendedorismo. A ideia é simples: cada pessoa tem um jeito de gostar de brownie, então deixamos você escolher o seu.</p>
+    <p>Siga a gente no <a href="https://instagram.com/partiu_brownie"><b>@partiu_brownie</b></a> para ver novidades.</p>
+  </div>
+</div></section>
 
-  <section class="products" id="sabores">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Sabores da casa</span>
-          <h2 class="section-title">Os queridinhos da Partiu.</h2>
-        </div>
-        <p>Se não quiser montar, vai em um desses que já são sucesso.</p>
-      </div>
-
-      
-<div class="product-grid">
-        <article class="product">
-          <div class="visual v1"><span>Clássico</span><div class="mini-brownie"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brownie tradicional</h3><strong>R$ 8</strong></div>
-            <p>O brownie clássico da marca, simples e muito pedido.</p>
-            <button class="add-ready" data-name="Brownie tradicional" data-price="8">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-
-        <article class="product featured">
-          <div class="visual v2"><span>Cremoso</span><div class="mini-brownie cream-b"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brownie de Ninho</h3><strong>R$ 13</strong></div>
-            <p>Brownie com recheio de Ninho, inspirado no cardápio do Instagram.</p>
-            <button class="add-ready" data-name="Brownie de Ninho" data-price="13">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-
-        <article class="product featured">
-          <div class="visual v2"><span>Mais pedido</span><div class="mini-brownie cream-b"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brownie de Ninho com Nutella</h3><strong>R$ 13</strong></div>
-            <p>Ninho com Nutella em uma das combinações mais fortes da marca.</p>
-            <button class="add-ready" data-name="Brownie de Ninho com Nutella" data-price="13">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="visual v3"><span>Chocolate</span><div class="mini-brownie"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brownie de brigadeiro</h3><strong>R$ 13</strong></div>
-            <p>Chocolate intenso com recheio cremoso de brigadeiro.</p>
-            <button class="add-ready" data-name="Brownie de brigadeiro" data-price="13">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="visual v2"><span>Dupla</span><div class="mini-brownie cream-b"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brownie de Ninho com brigadeiro</h3><strong>R$ 13</strong></div>
-            <p>Uma combinação com dois recheios, igual ao cardápio da Partiu Brownie.</p>
-            <button class="add-ready" data-name="Brownie de Ninho com brigadeiro" data-price="13">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="visual v4"><span>2 em 1</span><div class="mini-brownie cookie"></div></div>
-          <div class="product-body">
-            <div class="product-line"><h3>Brokie</h3><strong>R$ 8</strong></div>
-            <p>Metade brownie, metade cookie. Crocante e macio ao mesmo tempo.</p>
-            <button class="add-ready" data-name="Brokie" data-price="8">Adicionar à caixa <b>+</b></button>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="builder-section" id="monte">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Monte o seu</span>
-          <h2 class="section-title">Cria o seu Partiu.</h2>
-        </div>
-        <p>Escolha a massa, o recheio principal e, se quiser, um recheio extra.</p>
-      </div>
-
-      
-<div class="builder-layout">
-        <div class="builder">
-
-          <div class="group" data-group="massa">
-            <div class="group-title"><span>01</span><div><h3>Massa</h3><p>Escolha a base do seu brownie.</p></div></div>
-            <div class="choices">
-              <button class="choice active" data-value="Tradicional" data-price="8"><span>Tradicional</span><small>R$ 8</small></button>
-              <button class="choice" data-value="Brokie" data-price="8"><span>Brokie</span><small>R$ 8</small></button>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="group" data-group="recheio">
-            <div class="group-title"><span>02</span><div><h3>Recheio</h3><p>Escolha um dos recheios do cardápio.</p></div></div>
-            <div class="choices">
-              <button class="choice active" data-value="Sem recheio" data-price="0"><span>Sem recheio</span><small>Incluso</small></button>
-              <button class="choice" data-value="Ninho" data-price="5"><span>Ninho</span><small>+ R$ 5</small></button>
-              <button class="choice" data-value="Ninho com Nutella" data-price="5"><span>Ninho com Nutella</span><small>+ R$ 5</small></button>
-              <button class="choice" data-value="Brigadeiro" data-price="5"><span>Brigadeiro</span><small>+ R$ 5</small></button>
-              <button class="choice" data-value="Ninho com brigadeiro" data-price="5"><span>Ninho com brigadeiro</span><small>+ R$ 5</small></button>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="group" data-group="extra">
-            <div class="group-title"><span>03</span><div><h3>Extra</h3><p>Se quiser, escolha um segundo recheio.</p></div></div>
-            <div class="choices">
-              <button class="choice active" data-value="Sem extra" data-price="0"><span>Sem extra</span><small>Incluso</small></button>
-              <button class="choice" data-value="Ninho" data-price="2"><span>Ninho</span><small>+ R$ 2</small></button>
-              <button class="choice" data-value="Brigadeiro" data-price="2"><span>Brigadeiro</span><small>+ R$ 2</small></button>
-              <button class="choice" data-value="Nutella" data-price="2"><span>Nutella</span><small>+ R$ 2</small></button>
-              <button class="choice" data-value="Morango" data-price="2"><span>Morango</span><small>+ R$ 2</small></button>
-            </div>
-          </div>
-        </div>
-
-        <aside class="summary">
-          <div class="summary-top">
-            <span>Seu brownie</span>
-          </div>
-
-          <div class="preview-stage">
-            <div class="brownie-preview" id="browniePreview" aria-label="Prévia do brownie montado">
-              <div class="preview-top">
-                <span class="crack crack-1"></span>
-                <span class="crack crack-2"></span>
-
-                <span class="chip chip-1"></span>
-                <span class="chip chip-2"></span>
-                <span class="chip chip-3"></span>
-
-                <span class="berry berry-1"></span>
-                <span class="berry berry-2"></span>
-              </div>
-
-              <div class="preview-filling filling-a" id="fillingA"></div>
-              <div class="preview-filling filling-b" id="fillingB"></div>
-              <div class="preview-extra" id="extraLayer"></div>
-
-              <div class="preview-bottom">
-                <span class="chip chip-4"></span>
-                <span class="chip chip-5"></span>
-              </div>
-            </div>
-          </div>
-          <h3 id="summaryTitle">Tradicional</h3>
-          <div class="summary-list">
-            <div><span>Massa</span><b id="sMassa">Tradicional</b></div>
-            <div><span>Recheio</span><b id="sRecheio">Sem recheio</b></div>
-            <div><span>Extra</span><b id="sExtra">Sem extra</b></div>
-          </div>
-          <div class="summary-total"><span>Total</span><strong id="summaryPrice">R$ 8,00</strong></div>
-          <button class="btn aqua full" id="addCustom">Adicionar à caixa</button>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="cta">
-    <div class="container cta-inner">
-      <div>
-        <span class="eyebrow">o final você já sabe</span>
-        <h2 class="section-title">Bateu a vontade?<br>Partiu Brownie.</h2>
-      </div>
-      <div class="cta-actions">
-        <a class="btn dark" href="#monte">Montar agora</a>
-        <a class="btn light" href="https://wa.me/5512987067121" target="_blank">Chamar no WhatsApp</a>
-      </div>
-    </div>
-  </section>
+<section class="end"><div class="wrap">
+  <h2>Bateu a vontade? Partiu Brownie.</h2>
+  <div class="btns"><a class="btn" href="#monte">Montar agora</a><a class="btn alt" href="https://wa.me/5512987067121">Chamar no WhatsApp</a></div>
+</div></section>
 </main>
 
-<footer>
-  <div class="container footer-grid">
-    <div><strong class="footer-brand">Partiu Brownie</strong><p>Bateu a vontade? Partiu. • Caraguatatuba, SP</p></div>
-    <div class="footer-links"><a href="#sabores">Sabores</a><a href="#monte">Monte o seu</a></div>
-    <div class="footer-links"><a href="https://instagram.com/partiu_brownie" target="_blank">@partiu_brownie</a><a href="https://wa.me/5512987067121" target="_blank">(12) 98706-7121</a></div>
-  </div>
-  <div class="container footer-bottom"><span>Projeto de empreendedorismo • 2026</span><span>Partiu Brownie</span></div>
-</footer>
+<footer><div class="wrap">
+  <span>Partiu Brownie · Caraguatatuba, SP · Projeto de empreendedorismo 2026</span>
+  <span><a href="https://instagram.com/partiu_brownie">@partiu_brownie</a> · <a href="https://wa.me/5512987067121">(12) 98706-7121</a></span>
+</div></footer>
 
-<div class="overlay" id="overlay"></div>
-<aside class="cart" id="cart">
-  <div class="cart-header">
-    <div><small>Seu pedido</small><h2>Sua caixa</h2></div>
-    <button id="closeCart">×</button>
-  </div>
-  <div class="cart-body" id="cartItems">
-    <div class="empty">
-      <span>🍫</span><h3>Sua caixa está vazia.</h3><p>Adicione um sabor pronto ou monte seu brownie.</p>
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
-    <button class="btn dark full" id="checkout">Finalizar pedido</button>
-    <button class="clear" id="clearCart">Limpar caixa</button>
-    <small>Simulação escolar. Nenhum pagamento é realizado.</small>
-  </div>
+<div class="shade" id="shade"></div>
+<aside class="drawer" id="drawer" aria-label="Sua caixa">
+  <header><h2>Sua caixa</h2><button class="x" id="closeCart" aria-label="Fechar">×</button></header>
+  <div class="items" id="items"></div>
+  <div class="tot"><span>Total</span><span id="total">R$ 0,00</span></div>
+  <a class="btn berry" id="finish" href="#">Finalizar pelo WhatsApp</a>
+  <button class="btn alt" id="clear">Limpar caixa</button>
+  <p class="note">Simulação escolar. Nenhum pagamento é realizado.</p>
 </aside>
+<div class="toast" id="toast" role="status"></div>
 
-<div class="toast" id="toast">✓ <span id="toastText">Adicionado à caixa</span></div>
+<script>
+const $=s=>document.querySelector(s),brl=n=>'R$ '+n.toFixed(2).replace('.',',');
+/* ajuste aqui nomes, preços e arquivos de foto */
+const SABORES=[
+ {n:'Brownie tradicional',p:8,t:'Clássico',d:'O brownie clássico da marca, simples e muito pedido.',img:'tradicional'},
+ {n:'Brownie de Ninho',p:13,t:'Cremoso',d:'Recheio de Ninho, direto do cardápio do Instagram.',img:'ninho'},
+ {n:'Brownie de Ninho com Nutella',p:13,t:'Mais pedido',d:'Ninho com Nutella, uma das combinações mais fortes da marca.',img:'ninho-nutella'},
+ {n:'Brownie de brigadeiro',p:13,t:'Chocolate',d:'Chocolate intenso com recheio cremoso de brigadeiro.',img:'brigadeiro'},
+ {n:'Brownie de Ninho com brigadeiro',p:13,t:'Dupla',d:'Dois recheios na mesma mordida.',img:'ninho-brigadeiro'},
+ {n:'Brokie',p:8,t:'2 em 1',d:'Metade brownie, metade cookie: crocante e macio.',img:'brokie'}];
+const MASSA=[{n:'Tradicional',p:8,d:'O brownie clássico'},{n:'Brokie',p:8,d:'Metade brownie, metade cookie'}];
+const REC=[{n:'Só a massa',p:0,d:'Sem recheio',c:null},{n:'Ninho',p:5,c:'#f2dc9b'},{n:'Ninho com Nutella',p:5,c:'linear-gradient(90deg,#f2dc9b 50%,#6b3a1e 50%)'},{n:'Brigadeiro',p:5,c:'#2a140c'},{n:'Ninho com brigadeiro',p:5,c:'linear-gradient(90deg,#f2dc9b 50%,#2a140c 50%)'}];
+const EXT=[{n:'Sem extra',p:0,d:'Só um recheio',c:null},{n:'Ninho',p:2,c:'#f2dc9b'},{n:'Brigadeiro',p:2,c:'#2a140c'},{n:'Nutella',p:2,c:'#6b3a1e'},{n:'Morango',p:2,c:'#c9304f'}];
+let cart=[],sel={massa:0,rec:0,ext:0};
 
-<div class="modal" id="modal">
-  <div class="modal-card">
-    <button class="modal-close" id="closeModal">×</button>
-    <span class="modal-icon">🍫</span>
-    <span class="eyebrow">Pedido pronto</span>
-    <h2>Agora é só finalizar.</h2>
-    <p id="modalText"></p>
-    <a class="btn dark full" href="https://wa.me/5512987067121" target="_blank">Chamar no WhatsApp</a>
-    <button class="btn light full" id="continueBtn">Continuar no site</button>
-  </div>
-</div>
+$('#grid').innerHTML=SABORES.map((s,i)=>`<article class="card"><div class="ph" data-label="Foto: assets/${s.img}.jpg"><img src="assets/${s.img}.jpg" alt="${s.n}" onerror="this.remove()"></div><div class="b"><span class="tag">${s.t}</span><h3>${s.n}</h3><p>${s.d}</p><div class="row"><span class="price">${brl(s.p)}</span><button class="btn" data-s="${i}">Adicionar</button></div></div></article>`).join('');
+$('#grid').onclick=e=>{const b=e.target.closest('[data-s]');if(b){const s=SABORES[b.dataset.s];add(s.n,'',s.p)}};
 
-<script src="script.js"></script>
+function sub(o,key){return key==='massa'?o.d+' · '+brl(o.p):(o.p?'+ '+brl(o.p):o.d)}
+function opts(id,list,key){$(id).innerHTML=list.map((o,i)=>`<div class="opt"><input type="radio" name="${key}" id="${key}${i}" value="${i}"${sel[key]===i?' checked':''}><label for="${key}${i}"><b>${o.n}</b><span>${sub(o,key)}</span></label></div>`).join('');
+ $(id).onchange=e=>{sel[key]=+e.target.value;draw()}}
+opts('#o-massa',MASSA,'massa');opts('#o-rec',REC,'rec');opts('#o-ext',EXT,'ext');
+
+function cur(){const m=MASSA[sel.massa],r=REC[sel.rec],x=EXT[sel.ext];return{m,r,x,total:m.p+r.p+x.p}}
+function draw(){const{m,r,x,total}=cur();
+ const chips=m.n==='Brokie'?'<span class="chips">'+[[12,16],[30,40],[55,12],[72,44],[88,20],[44,28]].map(a=>`<i style="left:${a[0]}%;top:${a[1]}px"></i>`).join('')+'</span>':'';
+ const f1=r.c?`<div class="fill on" style="background:${r.c}"></div>`:'';
+ const f2=x.c?`<div class="fill f2 on" style="background:${x.c}"></div>`:'';
+ const none=!r.c&&!x.c?'<div class="empty">massa pura, sem recheio</div>':'';
+ $('#slice').innerHTML=`<div class="top">${chips}${none}</div>${f1}${f2}<div class="base"></div>`;
+ $('#sum').innerHTML=`<li><span>Massa</span><span>${m.n}</span></li><li><span>Recheio</span><span>${r.c?r.n:'Só a massa'}</span></li><li><span>Extra</span><span>${x.c?x.n:'Sem extra'}</span></li><li><span>Total</span><span>${brl(total)}</span></li>`}
+$('#addMonte').onclick=()=>{const{m,r,x,total}=cur();add('Brownie montado ('+m.n+')',[r.c?r.n:'sem recheio',x.c?'extra '+x.n:''].filter(Boolean).join(', '),total)};
+draw();
+
+function add(n,d,p){cart.push({n,d,p});save();toast('Adicionado à caixa');}
+function save(){const t=cart.reduce((a,c)=>a+c.p,0);$('#count').textContent=cart.length;$('#total').textContent=brl(t);
+ $('#items').innerHTML=cart.length?cart.map((c,i)=>`<div class="it"><div><b>${c.n}</b><small>${c.d}</small></div><span>${brl(c.p)}</span><button data-r="${i}" aria-label="Remover">Remover</button></div>`).join(''):'<p class="vazia">Sua caixa está vazia. Adicione um sabor da casa ou monte o seu brownie.</p>';
+ const txt='Oi, Partiu Brownie! Quero fazer um pedido:\n'+cart.map(c=>'- '+c.n+(c.d?' ('+c.d+')':'')+' '+brl(c.p)).join('\n')+'\nTotal: '+brl(t);
+ $('#finish').href='https://wa.me/5512987067121?text='+encodeURIComponent(txt);
+ $('#finish').style.display=cart.length?'block':'none';$('#clear').style.display=cart.length?'block':'none'}
+$('#items').onclick=e=>{const b=e.target.closest('[data-r]');if(b){cart.splice(+b.dataset.r,1);save()}};
+$('#clear').onclick=()=>{cart=[];save()};
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1800)}
+const open=v=>{$('#drawer').classList.toggle('on',v);$('#shade').classList.toggle('on',v)};
+$('#openCart').onclick=()=>open(true);$('#closeCart').onclick=()=>open(false);$('#shade').onclick=()=>open(false);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')open(false)});
+save();
+</script>
 </body>
 </html>
